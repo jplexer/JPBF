@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPBF Font Test</title>
+    <style>
+        @font-face {
+            font-family: 'JPBF';
+            src: url('JPBF.ttf?v=3') format('truetype');
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .font-test {
+            font-family: 'JPBF', monospace;
+            font-size: 20px;
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.5;
+        }
+        
+        .label {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .char-box {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .char-display {
+            font-family: 'JPBF', monospace;
+            font-size: 36px;
+        }
+        
+        .char-label {
+            font-size: 10px;
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JPBF Font Test Page</h1>
+    
+    <div class="label">Numbers</div>
+    <div class="font-test">0123456789</div>
+    
+    <div class="label">Letters</div>
+    <div class="font-test">ABHILMNPT</div>
+    
+    <div class="label">Punctuation</div>
+    <div class="font-test">%,-./:?+</div>
+    
+    <div class="label">Special Characters</div>
+    <div class="font-test">°…▯</div>
+    
+    <div class="label">Sample Text</div>
+    <div class="font-test">HI BATMAN LAMP</div>
+    
+    <div class="label">Temperature</div>
+    <div class="font-test">27°/58°</div>
+    
+    <div class="label">All Characters</div>
+    <div class="character-grid">
+        <div class="char-box"><div class="char-display">%</div><div class="char-label">U+0025</div></div>
+        <div class="char-box"><div class="char-display">,</div><div class="char-label">U+002C</div></div>
+        <div class="char-box"><div class="char-display">-</div><div class="char-label">U+002D</div></div>
+        <div class="char-box"><div class="char-display">.</div><div class="char-label">U+002E</div></div>
+        <div class="char-box"><div class="char-display">/</div><div class="char-label">U+002F</div></div>
+        <div class="char-box"><div class="char-display">0</div><div class="char-label">U+0030</div></div>
+        <div class="char-box"><div class="char-display">1</div><div class="char-label">U+0031</div></div>
+        <div class="char-box"><div class="char-display">2</div><div class="char-label">U+0032</div></div>
+        <div class="char-box"><div class="char-display">3</div><div class="char-label">U+0033</div></div>
+        <div class="char-box"><div class="char-display">4</div><div class="char-label">U+0034</div></div>
+        <div class="char-box"><div class="char-display">5</div><div class="char-label">U+0035</div></div>
+        <div class="char-box"><div class="char-display">6</div><div class="char-label">U+0036</div></div>
+        <div class="char-box"><div class="char-display">7</div><div class="char-label">U+0037</div></div>
+        <div class="char-box"><div class="char-display">8</div><div class="char-label">U+0038</div></div>
+        <div class="char-box"><div class="char-display">9</div><div class="char-label">U+0039</div></div>
+        <div class="char-box"><div class="char-display">:</div><div class="char-label">U+003A</div></div>
+        <div class="char-box"><div class="char-display">?</div><div class="char-label">U+003F</div></div>
+        <div class="char-box"><div class="char-display">A</div><div class="char-label">U+0041</div></div>
+        <div class="char-box"><div class="char-display">B</div><div class="char-label">U+0042</div></div>
+        <div class="char-box"><div class="char-display">H</div><div class="char-label">U+0048</div></div>
+        <div class="char-box"><div class="char-display">I</div><div class="char-label">U+0049</div></div>
+        <div class="char-box"><div class="char-display">L</div><div class="char-label">U+004C</div></div>
+        <div class="char-box"><div class="char-display">M</div><div class="char-label">U+004D</div></div>
+        <div class="char-box"><div class="char-display">N</div><div class="char-label">U+004E</div></div>
+        <div class="char-box"><div class="char-display">P</div><div class="char-label">U+0050</div></div>
+        <div class="char-box"><div class="char-display">T</div><div class="char-label">U+0054</div></div>
+        <div class="char-box"><div class="char-display">°</div><div class="char-label">U+00B0</div></div>
+        <div class="char-box"><div class="char-display">…</div><div class="char-label">U+2026</div></div>
+        <div class="char-box"><div class="char-display">▯</div><div class="char-label">U+25AF</div></div>
+    </div>
+</body>
+</html>

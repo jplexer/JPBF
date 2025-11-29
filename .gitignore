@@ -1,0 +1,12 @@
+# Temporary build files
+temp_bw/
+temp_svg/
+temp_fontforge.pe
+*.pbm
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
