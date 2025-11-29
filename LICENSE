@@ -1,0 +1,310 @@
+	path = third_party/hal_lis2dw12/lis2dw12-pid
+	url = https://github.com/STMicroelectronics/lis2dw12-pid.git
+[submodule "third_party/JPBF"]
+	path = third_party/JPBF
+	url = https://github.com/jplexer/JPBF
+
+    },
+    {
+      "type": "font",
+      "name": "JPBF_20_BOLD_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_26_BOLD_NUMBERS_AM_PM",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_28_LIGHT_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_32_BOLD_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_36_BOLD_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_38_BOLD_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "font",
+      "name": "JPBF_42_NUMBERS",
+      "file": "normal/base/ttf/JPBF.ttf",
+      "characterRegex": "[ 0-9:/.,°…▯ABHILKMNPT\\%\\?\\+-]"
+    },
+    {
+      "type": "pbi8",
+      "name": "MUSIC_ICON_SKIP_FORWARD",
+      "file": "normal/base/images/music_icon_skip_forward.png"
+  text_layer_set_text_alignment(data->steps_card.cur_step_layer, GTextAlignmentCenter);
+  text_layer_set_font(data->steps_card.cur_step_layer,
+                      fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+                      fonts_get_system_font(FONT_KEY_JPBF_38_BOLD_NUMBERS));
+  text_layer_set_background_color(data->steps_card.cur_step_layer, GColorClear);
+  text_layer_set_text_color(data->steps_card.cur_step_layer, GColorWhite);
+  layer_add_child(window_layer, text_layer_get_layer(data->steps_card.cur_step_layer));
+  text_layer_set_text_alignment(data->steps_card.time_layer, GTextAlignmentCenter);
+  text_layer_set_font(data->steps_card.time_layer,
+                      fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+                      fonts_get_system_font(FONT_KEY_JPBF_38_BOLD_NUMBERS));
+  text_layer_set_background_color(data->steps_card.time_layer, GColorClear);
+  text_layer_set_text_color(data->steps_card.time_layer, GColorElectricBlue);
+  layer_add_child(window_layer, text_layer_get_layer(data->steps_card.time_layer));
+  text_layer_set_text_alignment(data->steps_card.delta_step_layer, GTextAlignmentCenter);
+  text_layer_set_font(data->steps_card.delta_step_layer,
+                      fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+                      fonts_get_system_font(FONT_KEY_JPBF_38_BOLD_NUMBERS));
+  text_layer_set_background_color(data->steps_card.delta_step_layer, GColorClear);
+  text_layer_set_text_color(data->steps_card.delta_step_layer, GColorLightGray);
+  layer_add_child(window_layer, text_layer_get_layer(data->steps_card.delta_step_layer));
+  text_layer_set_text_alignment(data->cur_temp_layer, GTextAlignmentCenter);
+  text_layer_set_font(data->cur_temp_layer,
+                      fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS));
+                      fonts_get_system_font(FONT_KEY_JPBF_20_BOLD_NUMBERS));
+  text_layer_set_background_color(data->cur_temp_layer, GColorClear);
+  text_layer_set_text_color(data->cur_temp_layer, GColorBlack);
+  layer_add_child(window_layer, text_layer_get_layer(data->cur_temp_layer));
+  text_layer_set_text_alignment(data->temp_range_layer, GTextAlignmentCenter);
+  text_layer_set_font(data->temp_range_layer,
+                      fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS));
+                      fonts_get_system_font(FONT_KEY_JPBF_20_BOLD_NUMBERS));
+  text_layer_set_background_color(data->temp_range_layer, GColorClear);
+  text_layer_set_text_color(data->temp_range_layer, GColorBlack);
+  layer_add_child(window_layer, text_layer_get_layer(data->temp_range_layer));
+// Use larger font for taller displays
+#if DISP_ROWS > LEGACY_2X_DISP_ROWS
+#define HEALTH_STEPS_FONT FONT_KEY_LECO_32_BOLD_NUMBERS
+#define HEALTH_STEPS_FONT FONT_KEY_JPBF_32_BOLD_NUMBERS
+#else
+#define HEALTH_STEPS_FONT FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM
+#define HEALTH_STEPS_FONT FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM
+#endif
+
+typedef struct HealthActivitySummaryCardData {
+    .last_updated = health_data_hr_get_last_updated_timestamp(health_data),
+#if DISP_ROWS > LEGACY_2X_DISP_ROWS
+    .bpm_font = fonts_get_system_font(FONT_KEY_LECO_32_BOLD_NUMBERS),
+    .units_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM),
+    .bpm_font = fonts_get_system_font(FONT_KEY_JPBF_32_BOLD_NUMBERS),
+    .units_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM),
+#else
+    .bpm_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM),
+    .units_font = fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS),
+    .bpm_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM),
+    .units_font = fonts_get_system_font(FONT_KEY_JPBF_20_BOLD_NUMBERS),
+#endif
+    .timestamp_font = fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
+  };
+    .health_data = health_data,
+#if DISP_ROWS > LEGACY_2X_DISP_ROWS
+    .number_font = fonts_get_system_font(FONT_KEY_LECO_32_BOLD_NUMBERS),
+    .unit_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM),
+    .number_font = fonts_get_system_font(FONT_KEY_JPBF_32_BOLD_NUMBERS),
+    .unit_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM),
+#else
+    .number_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM),
+    .unit_font = fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS),
+    .number_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM),
+    .unit_font = fonts_get_system_font(FONT_KEY_JPBF_20_BOLD_NUMBERS),
+#endif
+    .typical_font = fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
+    .em_dash_font = fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD),
+  text_layer_init_with_parameters(&peek_layer->number.text_layer,
+                                  &text_rect,
+                                  NULL, fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM),
+                                  NULL, fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM),
+                                  GColorBlack, GColorClear, text_alignment,
+                                  GTextOverflowModeTrailingEllipsis);
+  layer_add_child((Layer *)peek_layer, (Layer *)&peek_layer->number.text_layer);
+void weather_app_layout_init(WeatherAppLayout *layout, const GRect *frame) {
+  layout->location_font = fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD);
+  layout->temperature_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM);
+  layout->temperature_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM);
+  layout->high_low_phrase_font = fonts_get_system_font(FONT_KEY_GOTHIC_18);
+  layout->tomorrow_font = fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD);
+
+  gbitmap_init_with_resource(&data->heart_icon, RESOURCE_ID_WORKOUT_APP_HEART);
+  data->steps_font = fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD);
+  data->time_font = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM);
+  data->time_font = fonts_get_system_font(FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM);
+#else
+  gbitmap_init_with_resource(&data->shoe_blue, RESOURCE_ID_STRIDE_SHOE_BLUE);
+  gbitmap_init_with_resource(&data->shoe_green, RESOURCE_ID_STRIDE_SHOE_GREEN);
+  app_window_stack_push(&s_low_power_data->low_power_window, true /* Animated */);
+
+  const GFont text_font = fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS);
+  const GFont text_font = fonts_get_system_font(FONT_KEY_JPBF_42_NUMBERS);
+  const GTextAlignment text_alignment = GTextAlignmentCenter;
+  const unsigned int font_height = fonts_get_font_height(text_font);
+  const GTextOverflowMode text_overflow_mode = GTextOverflowModeTrailingEllipsis;
+    .update = timeline_layout_time_text_update,
+    .buffer_size = TIME_STRING_REQUIRED_LENGTH,
+    .text.font_key = FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM,
+    .text.font_key = FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM,
+    .text.alignment = LayoutTextAlignment_Center,
+    .text.extent.margin.h = PBL_IF_RECT_ELSE(9, 1), // time margin height
+  };
+  const LayoutColors *colors = &layout->timeline_layout.impl->default_colors;
+  text_layer_init_with_parameters(&layout->date_layer, &GRectZero, layout->day_date_buffer,
+                                  fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS),
+                                  fonts_get_system_font(FONT_KEY_JPBF_20_BOLD_NUMBERS),
+                                  colors->primary_color, GColorClear, GTextAlignmentCenter,
+                                  GTextOverflowModeWordWrap);
+  layer_add_child((Layer *)layout, (Layer *)&layout->date_layer);
+                                               AttributeIdRankAway;
+  const char *large_font = is_pregame ? FONT_KEY_GOTHIC_28_BOLD :
+                                        FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM;
+                                        FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM;
+  const char *small_font = FONT_KEY_GOTHIC_18_BOLD;
+
+  const LayoutNodeTextAttributeConfig large_config = {
+    .text.font_key = PREFERRED_CONTENT_SIZE_SWITCH(PreferredContentSizeDefault,
+      //! @note this is the same as Medium until Small is designed
+      /* small */ FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM,
+      /* medium */ FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM,
+      /* large */ FONT_KEY_LECO_36_BOLD_NUMBERS,
+      /* small */ FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM,
+      /* medium */ FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM,
+      /* large */ FONT_KEY_JPBF_36_BOLD_NUMBERS,
+      //! @note this is the same as Large until ExtraLarge is designed
+      /* extralarge */ FONT_KEY_LECO_36_BOLD_NUMBERS),
+      /* extralarge */ FONT_KEY_JPBF_36_BOLD_NUMBERS),
+    .text.fixed_lines = 1, // subtitle fixed lines
+    .text.alignment = LayoutTextAlignment_Center,
+    .text.extent.margin.h = IF_ICON_AT_TOP_ELSE(1, 9), // subtitle margin height
+#if !RECOVERY_FW
+      //! @note this is the same as Medium until Small is designed
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_LECO_20_BOLD_NUMBERS,
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_JPBF_20_BOLD_NUMBERS,
+#endif
+      //! @note this is the same as Medium until Small is designed
+      [TextStyleFont_TimeHeaderWords] = FONT_KEY_GOTHIC_14_BOLD,
+      [TextStyleFont_MenuCellSubtitle] = FONT_KEY_GOTHIC_18,
+#if !RECOVERY_FW
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_LECO_20_BOLD_NUMBERS,
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_JPBF_20_BOLD_NUMBERS,
+#endif
+      [TextStyleFont_TimeHeaderWords] = FONT_KEY_GOTHIC_14_BOLD,
+      [TextStyleFont_PinSubtitle] = FONT_KEY_GOTHIC_18,
+      [TextStyleFont_MenuCellSubtitle] = FONT_KEY_GOTHIC_24,
+#if !RECOVERY_FW
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM,
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM,
+#endif
+      [TextStyleFont_TimeHeaderWords] = FONT_KEY_GOTHIC_18_BOLD,
+      [TextStyleFont_PinSubtitle] = FONT_KEY_GOTHIC_24,
+#if !RECOVERY_FW
+      //! @note this is the same as Large until ExtraLarge is designed
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM,
+      [TextStyleFont_TimeHeaderNumbers] = FONT_KEY_JPBF_26_BOLD_NUMBERS_AM_PM,
+#endif
+      //! @note this is the same as Large until ExtraLarge is designed
+      [TextStyleFont_TimeHeaderWords] = FONT_KEY_GOTHIC_18_BOLD,
+Copyright (c) 2025, Joshua Jun (funnyna.me).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
